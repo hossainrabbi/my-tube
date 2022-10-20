@@ -1,6 +1,9 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
+import moment from 'moment/moment';
+import { AiFillLike } from 'react-icons/ai';
+import { MdModeComment } from 'react-icons/md';
 import useVideo from '../../hooks/useVideo';
 
 const VideoDetails = () => {
@@ -33,12 +36,29 @@ const VideoDetails = () => {
           <h2 className="text-2xl font-semibold">
             {videos[0]?.snippet?.title}
           </h2>
-          <p className="flex items-center text-gray-600">
-            <span>
-              {parseInt(videos[0]?.statistics?.viewCount).toLocaleString()}{' '}
-              views
-            </span>
-          </p>
+          <div className="flex items-center justify-between text-gray-600 mb-3">
+            <p className="flex items-center gap-2">
+              <span>
+                {parseInt(videos[0]?.statistics?.viewCount).toLocaleString()}{' '}
+                views
+              </span>
+              <span>.</span>
+              <span>
+                {moment(videos[0]?.snippet?.publishedAt).format('MMM D, YYYY')}
+              </span>
+            </p>
+            <p className="flex items-center gap-4">
+              <span className="flex items-center">
+                <AiFillLike className="mr-1" />
+                {parseInt(videos[0]?.statistics?.likeCount).toLocaleString()}
+              </span>
+              <span className="flex items-center">
+                <MdModeComment className="mr-1" />
+                {parseInt(videos[0]?.statistics?.commentCount).toLocaleString()}
+              </span>
+            </p>
+          </div>
+          <hr />
         </div>
       </div>
 
