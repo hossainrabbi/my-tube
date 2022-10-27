@@ -4,34 +4,26 @@ import ReactPlayer from 'react-player';
 import moment from 'moment/moment';
 import { AiFillLike } from 'react-icons/ai';
 import useVideo from '../../hooks/useVideo';
-import Comment from '../Comment';
+import VideoSuggest from '../VideoSuggest';
+import Comments from '../Comments';
 
 const VideoDetails = () => {
   const { videoId } = useParams();
-  const { loading, error, videos } = useVideo(
+  const { loading, videos } = useVideo(
     `videos?part=snippet,statistics&id=${videoId}`
   );
 
-  const {
-    loading: channelLoading,
-    error: channelError,
-    videos: channelDetails,
-  } = useVideo(
+  const { loading: channelLoading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
   );
 
-  const {
-    loading: commentLoading,
-    error: commentError,
-    videos: commentDetails,
-  } = useVideo(`commentThreads?part=snippet&videoId=${videoId}`);
-
-  if (loading || channelLoading || commentLoading) {
+  if (loading || channelLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error || channelError || commentError) {
-    return <div>Error...</div>;
+  // TODO:
+  if (videos.length <= 0 || channelDetails.length <= 0) {
+    return <div>Something is Error</div>;
   }
 
   return (
@@ -99,30 +91,17 @@ const VideoDetails = () => {
             {videos[0]?.statistics?.commentCount && (
               <>
                 <hr />
-                <div className="mt-4">
-                  <h5 className="text-xl font-semibold text-gray-600">
-                    {parseInt(
-                      videos[0]?.statistics?.commentCount
-                    ).toLocaleString()}{' '}
-                    Comments
-                  </h5>
-                </div>
-                {/* Comments */}
-                <div>
-                  {commentDetails.map((comment) => (
-                    <Comment
-                      {...comment?.snippet?.topLevelComment?.snippet}
-                      key={comment?.snippet?.topLevelComment?.id}
-                    />
-                  ))}
-                </div>
+                <Comments
+                  commentCount={videos[0]?.statistics?.commentCount}
+                  videoId={videoId}
+                />
               </>
             )}
           </div>
         </div>
       </div>
 
-      <div>ddfdsfsd</div>
+      <VideoSuggest videoId={videoId} />
     </section>
   );
 };

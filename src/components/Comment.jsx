@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { AiFillLike } from 'react-icons/ai';
+import { Interweave } from 'interweave';
 
 const Comment = ({
   authorDisplayName,
@@ -24,7 +25,11 @@ const Comment = ({
         <p className="text-gray-600 text-base my-1">
           {textDisplay.length > 250 ? (
             <>
-              {readMore ? textDisplay : `${textDisplay.slice(0, 249)}...`}
+              {readMore ? (
+                <Interweave content={textDisplay} />
+              ) : (
+                <Interweave content={`${textDisplay.slice(0, 249)}...`} />
+              )}
               <br />
               <button
                 className="font-semibold hover:underline"
@@ -34,7 +39,7 @@ const Comment = ({
               </button>
             </>
           ) : (
-            textDisplay
+            <Interweave content={textDisplay} />
           )}
         </p>
         <span className="flex items-center text-gray-600">
