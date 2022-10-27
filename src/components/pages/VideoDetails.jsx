@@ -1,10 +1,10 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import moment from 'moment/moment';
 import { AiFillLike } from 'react-icons/ai';
-import { MdModeComment } from 'react-icons/md';
 import useVideo from '../../hooks/useVideo';
+import Comment from '../Comment';
 
 const VideoDetails = () => {
   const { videoId } = useParams();
@@ -12,13 +12,25 @@ const VideoDetails = () => {
     `videos?part=snippet,statistics&id=${videoId}`
   );
 
-  console.log(videos);
+  const {
+    loading: channelLoading,
+    error: channelError,
+    videos: channelDetails,
+  } = useVideo(
+    `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
+  );
 
-  if (loading) {
+  const {
+    loading: commentLoading,
+    error: commentError,
+    videos: commentDetails,
+  } = useVideo(`commentThreads?part=snippet&videoId=${videoId}`);
+
+  if (loading || channelLoading || commentLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error) {
+  if (error || channelError || commentError) {
     return <div>Error...</div>;
   }
 
@@ -39,7 +51,8 @@ const VideoDetails = () => {
           <div className="flex items-center justify-between text-gray-600 mb-3">
             <p className="flex items-center gap-2">
               <span>
-                {parseInt(videos[0]?.statistics?.viewCount).toLocaleString()}{' '}
+                {parseInt(videos[0]?.statistics?.viewCount).toLocaleString() ||
+                  0}{' '}
                 views
               </span>
               <span>.</span>
@@ -50,15 +63,62 @@ const VideoDetails = () => {
             <p className="flex items-center gap-4">
               <span className="flex items-center">
                 <AiFillLike className="mr-1" />
-                {parseInt(videos[0]?.statistics?.likeCount).toLocaleString()}
-              </span>
-              <span className="flex items-center">
-                <MdModeComment className="mr-1" />
-                {parseInt(videos[0]?.statistics?.commentCount).toLocaleString()}
+                {parseInt(videos[0]?.statistics?.likeCount).toLocaleString() ||
+                  0}
               </span>
             </p>
           </div>
           <hr />
+          {/* Channel Info */}
+          <div>
+            <div className="flex items-center gap-4 mt-4">
+              <Link
+                to={`/channel/${channelDetails[0]?.id}`}
+                className="w-16 h-16 rounded-full"
+              >
+                <img
+                  src={channelDetails[0]?.snippet?.thumbnails?.default?.url}
+                  alt={channelDetails[0]?.snippet?.localized?.title}
+                  className="w-full h-full object-cover rounded-full"
+                />
+              </Link>
+              <div>
+                <Link to={`/channel/${channelDetails[0]?.id}`}>
+                  <h3 className="text-xl font-semibold">
+                    {channelDetails[0]?.snippet?.localized?.title}
+                  </h3>
+                </Link>
+                <p className="text-gray-600 text-sm">
+                  {channelDetails[0]?.statistics?.subscriberCount} subscriber
+                </p>
+              </div>
+            </div>
+            <p className="text-gray-600 my-4 ml-20">
+              {channelDetails[0]?.snippet?.localized?.description}
+            </p>
+            {videos[0]?.statistics?.commentCount && (
+              <>
+                <hr />
+                <div className="mt-4">
+                  <h5 className="text-xl font-semibold text-gray-600">
+                    {parseInt(
+                      videos[0]?.statistics?.commentCount
+                    ).toLocaleString()}{' '}
+                    Comments
+                  </h5>
+                </div>
+                {/* Comments */}
+                <div>
+                  {commentDetails.map((comment) => (
+                    <Comment
+                      {...comment?.snippet?.topLevelComment?.snippet}
+                      key={comment?.snippet?.topLevelComment?.id}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
 

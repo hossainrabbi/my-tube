@@ -4,10 +4,8 @@ import Video from '../Video';
 
 const Home = () => {
   const { loading, error, videos } = useVideo(
-    `search?part=snippet,id&q=${'All'}&maxResults=${'50'}`
+    `search?part=snippet,id&q=${'new'}&maxResults=${'50'}&regionCode=${'bd'}`
   );
-
-  // console.log({ loading, error, videos });
 
   if (loading) {
     return <h2 className="main-container">Loading...</h2>;

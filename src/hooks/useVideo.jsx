@@ -21,12 +21,12 @@ const useVideo = (url) => {
         const res = await fetch(`${BASE_URL}/${url}`, options);
         const data = await res.json();
 
-        setLoading(false);
         setError(false);
         setVideos([...data.items]);
-      } catch {
         setLoading(false);
+      } catch {
         setError(true);
+        setLoading(false);
       }
     }
 
