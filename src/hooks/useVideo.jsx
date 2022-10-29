@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useVideo = (url) => {
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -15,21 +15,29 @@ const useVideo = (url) => {
     };
 
     async function fetchFromApi() {
-      setLoading(true);
+      try {
+        setLoading(true);
 
-      const res = await fetch(`${BASE_URL}/${url}`, options);
-      const { items } = await res.json();
+        const res = await fetch(`${BASE_URL}/${url}`, options);
+        const data = await res.json();
 
-      if (items && items.length > 0) {
+        console.log(data);
+
+        if (data.items && data.items.length > 0) {
+          setError(false);
+          setLoading(false);
+          setVideos([...data.items]);
+        }
+      } catch {
         setLoading(false);
-        setVideos([...items]);
+        setError(true);
       }
     }
 
     fetchFromApi();
   }, [url]);
 
-  return { loading, videos };
+  return { loading, error, videos };
 };
 
 export default useVideo;

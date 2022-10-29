@@ -6,6 +6,7 @@ import { AiFillLike } from 'react-icons/ai';
 import useVideo from '../../hooks/useVideo';
 import VideoSuggest from '../VideoSuggest';
 import Comments from '../Comments';
+import { Interweave } from 'interweave';
 
 const VideoDetails = () => {
   const { videoId } = useParams();
@@ -86,7 +87,9 @@ const VideoDetails = () => {
               </div>
             </div>
             <p className="text-gray-600 my-4 ml-20">
-              {channelDetails[0]?.snippet?.localized?.description}
+              <Interweave
+                content={channelDetails[0]?.snippet?.localized?.description}
+              />
             </p>
             {videos[0]?.statistics?.commentCount && (
               <>
