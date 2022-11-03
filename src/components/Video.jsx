@@ -4,7 +4,7 @@ const Video = ({ id, snippet }) => {
   return (
     <Link to={`/videos/${id?.videoId}`}>
       <article className="rounded shadow transition border border-transparent hover:border hover:border-gray-200 min-h-[17rem]">
-        <div className="h-40">
+        <div className="h-48">
           <img
             src={snippet?.thumbnails?.high?.url}
             alt={snippet?.channelTitle}
