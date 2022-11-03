@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useSearchContext } from '../../contexts/SearchContext';
 import useVideo from '../../hooks/useVideo';
 import Channel from '../Channel';
@@ -26,7 +26,13 @@ const Home = () => {
         {videos.length > 0 ? (
           <div className="grid grid-cols-4 gap-7">
             {videos.map((video) => (
-              <>
+              <Fragment
+                key={
+                  video?.id?.channelId ||
+                  video?.id?.playlistId ||
+                  video?.id?.videoId
+                }
+              >
                 {video?.id?.channelId && (
                   <Channel {...video} key={video?.id?.channelId} />
                 )}
@@ -36,7 +42,7 @@ const Home = () => {
                 {video?.id?.videoId && (
                   <Video {...video} key={video?.id?.videoId} />
                 )}
-              </>
+              </Fragment>
             ))}
           </div>
         ) : (

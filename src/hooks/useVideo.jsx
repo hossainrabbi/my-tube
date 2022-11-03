@@ -21,8 +21,6 @@ const useVideo = (url) => {
         const res = await fetch(`${BASE_URL}/${url}`, options);
         const data = await res.json();
 
-        console.log(data);
-
         if (data.items && data.items.length > 0) {
           setError(false);
           setLoading(false);

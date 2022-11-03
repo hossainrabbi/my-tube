@@ -5,6 +5,7 @@ import { AiFillCaretRight } from 'react-icons/ai';
 import useVideo from '../../hooks/useVideo';
 import PlayVideo from '../PlayVideo';
 import VideoSuggest from '../VideoSuggest';
+import { useEffect } from 'react';
 
 const PlayPlaylist = () => {
   const { playlistId } = useParams();
@@ -15,19 +16,21 @@ const PlayPlaylist = () => {
     `playlistItems?part=snippet&playlistId=${playlistId}&maxResults=1000`
   );
 
+  useEffect(() => {
+    setVideoId(videos[0]?.snippet?.resourceId?.videoId);
+  }, [videos]);
+
   const { loading: videoLoading, videos: SingleVideo } = useVideo(
-    `videos?part=snippet,statistics&id=${
-      videoId || videos[0]?.snippet?.resourceId?.videoId
-    }`
+    `videos?part=snippet,statistics&id=${videoId}`
   );
 
   const { loading: channelLoading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
   );
 
-  if (loading || channelLoading || videoLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading || channelLoading || videoLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   // TODO:
   if (videos.length <= 0 || channelDetails.length <= 0) {
@@ -39,7 +42,7 @@ const PlayPlaylist = () => {
     <section className="main-container grid grid-cols-3 gap-7">
       <div className="col-span-2">
         <PlayVideo
-          videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}
+          videoId={videoId}
           videos={SingleVideo}
           channelDetails={channelDetails}
         />
@@ -53,11 +56,11 @@ const PlayPlaylist = () => {
               onClick={() => setVideoId(item.snippet?.resourceId?.videoId)}
             >
               {videoId === item.snippet?.resourceId?.videoId ? (
-                <div className="text-lg">
+                <div className="text-lg w-8">
                   <AiFillCaretRight />
                 </div>
               ) : (
-                <span>{i + 1}</span>
+                <div className="text-lg w-8">{i + 1}</div>
               )}
 
               <img
@@ -69,9 +72,7 @@ const PlayPlaylist = () => {
             </div>
           ))}
         </div>
-        <VideoSuggest
-          videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}
-        />
+        <VideoSuggest videoId={videoId} />
       </div>
     </section>
   );
