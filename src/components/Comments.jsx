@@ -11,11 +11,6 @@ const Comments = ({ commentCount, videoId }) => {
     return <div>Loading...</div>;
   }
 
-  // TODO:
-  if (commentDetails.length <= 0) {
-    return <div>Comment Not Found...</div>;
-  }
-
   return (
     <div>
       <div className="mt-4">
@@ -25,12 +20,13 @@ const Comments = ({ commentCount, videoId }) => {
       </div>
       {/* Comments */}
       <div>
-        {commentDetails.map((comment) => (
-          <Comment
-            {...comment?.snippet?.topLevelComment?.snippet}
-            key={comment?.snippet?.topLevelComment?.id}
-          />
-        ))}
+        {commentDetails.length > 0 &&
+          commentDetails.map((comment) => (
+            <Comment
+              {...comment?.snippet?.topLevelComment?.snippet}
+              key={comment?.snippet?.topLevelComment?.id}
+            />
+          ))}
       </div>
     </div>
   );

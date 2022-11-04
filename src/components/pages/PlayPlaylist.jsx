@@ -9,35 +9,24 @@ import { useEffect } from 'react';
 
 const PlayPlaylist = () => {
   const { playlistId } = useParams();
-
   const [videoId, setVideoId] = useState('');
 
-  const { loading, error, videos } = useVideo(
+  const { videos } = useVideo(
     `playlistItems?part=snippet&playlistId=${playlistId}&maxResults=1000`
+  );
+
+  const { videos: channelDetails } = useVideo(
+    `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
+  );
+
+  const { videos: SingleVideo } = useVideo(
+    `videos?part=snippet,statistics&id=${videoId}`
   );
 
   useEffect(() => {
     setVideoId(videos[0]?.snippet?.resourceId?.videoId);
   }, [videos]);
 
-  const { loading: videoLoading, videos: SingleVideo } = useVideo(
-    `videos?part=snippet,statistics&id=${videoId}`
-  );
-
-  const { loading: channelLoading, videos: channelDetails } = useVideo(
-    `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
-  );
-
-  // if (loading || channelLoading || videoLoading) {
-  //   return <div>Loading...</div>;
-  // }
-
-  // TODO:
-  if (videos.length <= 0 || channelDetails.length <= 0) {
-    return <div>Something is Error</div>;
-  }
-
-  console.log({ loading, error, videos });
   return (
     <section className="main-container grid grid-cols-3 gap-7">
       <div className="col-span-2">

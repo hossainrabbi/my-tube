@@ -5,8 +5,17 @@ import { AiFillLike } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { Interweave } from 'interweave';
 import Comments from './Comments';
+import useVideo from '../hooks/useVideo';
 
-const PlayVideo = ({ videoId, videos, channelDetails }) => {
+const PlayVideo = ({ videoId, videos }) => {
+  const { loading, videos: channelDetails } = useVideo(
+    `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
+  );
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <ReactPlayer
@@ -66,15 +75,11 @@ const PlayVideo = ({ videoId, videos, channelDetails }) => {
               content={channelDetails[0]?.snippet?.localized?.description}
             />
           </p>
-          {videos[0]?.statistics?.commentCount && (
-            <>
-              <hr />
-              <Comments
-                commentCount={videos[0]?.statistics?.commentCount}
-                videoId={videoId}
-              />
-            </>
-          )}
+          <hr />
+          <Comments
+            commentCount={videos[0]?.statistics?.commentCount}
+            videoId={videoId}
+          />
         </div>
       </div>
     </>

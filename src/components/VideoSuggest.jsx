@@ -8,25 +8,15 @@ const VideoSuggest = ({ videoId }) => {
   );
 
   if (loading) {
-    return <div>Loading....</div>;
-  }
-
-  // TODO:
-  if (videos.length <= 0) {
-    return <div>Video Not Found....</div>;
+    return <div>Loading...</div>;
   }
 
   return (
     <div>
-      {videos ? (
-        <div className="grid grid-cols-1 gap-7">
-          {videos.map((video) => (
-            <Video {...video} key={video?.id?.videoId} />
-          ))}
-        </div>
-      ) : (
-        <h2>Video Not Found</h2>
-      )}
+      <div className="grid grid-cols-1 gap-7">
+        {videos.length > 0 &&
+          videos.map((video) => <Video {...video} key={video?.id?.videoId} />)}
+      </div>
     </div>
   );
 };

@@ -7,25 +7,16 @@ import Video from '../Video';
 
 const Home = () => {
   const { searchKeyword } = useSearchContext();
-
-  const { loading, error, videos } = useVideo(
+  const { videos } = useVideo(
     `search?part=snippet,id&q=${searchKeyword}&maxResults=${'50'}&regionCode=${'bd'}`
   );
-
-  if (loading) {
-    return <h2 className="main-container">Loading...</h2>;
-  }
-
-  if (error) {
-    return <div>Error...</div>;
-  }
 
   return (
     <section>
       <div className="main-container">
-        {videos.length > 0 ? (
-          <div className="grid grid-cols-4 gap-7">
-            {videos.map((video) => (
+        <div className="grid grid-cols-4 gap-7">
+          {videos.length > 0 &&
+            videos.map((video) => (
               <Fragment
                 key={
                   video?.id?.channelId ||
@@ -44,10 +35,7 @@ const Home = () => {
                 )}
               </Fragment>
             ))}
-          </div>
-        ) : (
-          <h2>Video Not Found</h2>
-        )}
+        </div>
       </div>
     </section>
   );
