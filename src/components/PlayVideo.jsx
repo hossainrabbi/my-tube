@@ -10,6 +10,8 @@ const PlayVideo = ({ videoId, videos }) => {
   const { loading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
   );
+  console.log({ videos });
+
   return (
     <>
       <ReactPlayer
@@ -43,7 +45,10 @@ const PlayVideo = ({ videoId, videos }) => {
         {/* Channel Info */}
         <div>
           {loading && <div>Loading...</div>}
-          <VideoChannelDetails channelDetails={channelDetails} />
+          <VideoChannelDetails
+            videoDescription={videos[0]?.snippet?.description}
+            channelDetails={channelDetails}
+          />
           <hr />
           <Comments
             commentCount={videos[0]?.statistics?.commentCount}

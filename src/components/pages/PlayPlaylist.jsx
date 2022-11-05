@@ -11,16 +11,14 @@ const PlayPlaylist = () => {
   const { playlistId } = useParams();
   const [videoId, setVideoId] = useState('');
 
-  const { videos } = useVideo(
+  const { loading, videos } = useVideo(
     `playlistItems?part=snippet&playlistId=${playlistId}&maxResults=1000`
   );
 
-  const { videos: channelDetails } = useVideo(
-    `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
-  );
-
-  const { videos: SingleVideo } = useVideo(
-    `videos?part=snippet,statistics&id=${videoId}`
+  const { loading: SingleVideoLoading, videos: SingleVideo } = useVideo(
+    `videos?part=snippet,statistics&id=${
+      videoId || videos[0]?.snippet?.resourceId?.videoId
+    }`
   );
 
   useEffect(() => {
@@ -30,38 +28,44 @@ const PlayPlaylist = () => {
   return (
     <section className="main-container grid grid-cols-3 gap-7">
       <div className="col-span-2">
-        <PlayVideo
-          videoId={videoId}
-          videos={SingleVideo}
-          channelDetails={channelDetails}
-        />
+        {SingleVideoLoading && <div>Loading...</div>}
+        {SingleVideo.length > 0 && (
+          <PlayVideo
+            videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}
+            videos={SingleVideo}
+          />
+        )}
       </div>
       <div>
         <div className="h-[555px] w-full overflow-y-scroll mb-5">
-          {videos?.map((item, i) => (
-            <div
-              className="flex items-center gap-5 mb-5 cursor-pointer"
-              key={item?.id}
-              onClick={() => setVideoId(item.snippet?.resourceId?.videoId)}
-            >
-              {videoId === item.snippet?.resourceId?.videoId ? (
-                <div className="text-lg w-8">
-                  <AiFillCaretRight />
-                </div>
-              ) : (
-                <div className="text-lg w-8">{i + 1}</div>
-              )}
+          {loading && <div>Loading...</div>}
+          {videos.length > 0 &&
+            videos.map((item, i) => (
+              <div
+                className="flex items-center gap-5 mb-5 cursor-pointer"
+                key={item?.id}
+                onClick={() => setVideoId(item.snippet?.resourceId?.videoId)}
+              >
+                {videoId === item.snippet?.resourceId?.videoId ? (
+                  <div className="text-lg w-8">
+                    <AiFillCaretRight />
+                  </div>
+                ) : (
+                  <div className="text-lg w-8">{i + 1}</div>
+                )}
 
-              <img
-                className="w-20"
-                src={item?.snippet?.thumbnails?.default?.url}
-                alt=""
-              />
-              <div>{item?.snippet?.title}</div>
-            </div>
-          ))}
+                <img
+                  className="w-20"
+                  src={item?.snippet?.thumbnails?.default?.url}
+                  alt=""
+                />
+                <div>{item?.snippet?.title}</div>
+              </div>
+            ))}
         </div>
-        <VideoSuggest videoId={videoId} />
+        <VideoSuggest
+          videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}
+        />
       </div>
     </section>
   );

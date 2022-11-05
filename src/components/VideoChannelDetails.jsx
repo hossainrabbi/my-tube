@@ -2,7 +2,7 @@ import { Interweave } from 'interweave';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const VideoChannelDetails = ({ channelDetails }) => {
+const VideoChannelDetails = ({ videoDescription, channelDetails }) => {
   return (
     <>
       <div className="flex items-center gap-4 mt-4">
@@ -28,9 +28,7 @@ const VideoChannelDetails = ({ channelDetails }) => {
         </div>
       </div>
       <p className="text-gray-600 my-4 ml-20">
-        <Interweave
-          content={channelDetails[0]?.snippet?.localized?.description}
-        />
+        <Interweave content={videoDescription} />
       </p>
     </>
   );
