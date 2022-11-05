@@ -7,10 +7,6 @@ const Comments = ({ commentCount, videoId }) => {
     `commentThreads?part=snippet&videoId=${videoId}`
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
       <div className="mt-4">
@@ -20,6 +16,7 @@ const Comments = ({ commentCount, videoId }) => {
       </div>
       {/* Comments */}
       <div>
+        {loading && <div>Loading...</div>}
         {commentDetails.length > 0 &&
           commentDetails.map((comment) => (
             <Comment

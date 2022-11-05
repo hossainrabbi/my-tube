@@ -15,9 +15,8 @@ const useVideo = (url) => {
     };
 
     async function fetchFromApi() {
+      setLoading(true);
       try {
-        setLoading(true);
-
         const res = await fetch(`${BASE_URL}/${url}`, options);
         const data = await res.json();
 
