@@ -2,20 +2,14 @@ import moment from 'moment';
 import React from 'react';
 import ReactPlayer from 'react-player';
 import { AiFillLike } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
-import { Interweave } from 'interweave';
 import Comments from './Comments';
 import useVideo from '../hooks/useVideo';
+import VideoChannelDetails from './VideoChannelDetails';
 
 const PlayVideo = ({ videoId, videos }) => {
   const { loading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
   );
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
       <ReactPlayer
@@ -48,33 +42,8 @@ const PlayVideo = ({ videoId, videos }) => {
         <hr />
         {/* Channel Info */}
         <div>
-          <div className="flex items-center gap-4 mt-4">
-            <Link
-              to={`/channel/${channelDetails[0]?.id}`}
-              className="w-16 h-16 rounded-full"
-            >
-              <img
-                src={channelDetails[0]?.snippet?.thumbnails?.default?.url}
-                alt={channelDetails[0]?.snippet?.localized?.title}
-                className="w-full h-full object-cover rounded-full"
-              />
-            </Link>
-            <div>
-              <Link to={`/channel/${channelDetails[0]?.id}`}>
-                <h3 className="text-xl font-semibold">
-                  {channelDetails[0]?.snippet?.localized?.title}
-                </h3>
-              </Link>
-              <p className="text-gray-600 text-sm">
-                {channelDetails[0]?.statistics?.subscriberCount} subscriber
-              </p>
-            </div>
-          </div>
-          <p className="text-gray-600 my-4 ml-20">
-            <Interweave
-              content={channelDetails[0]?.snippet?.localized?.description}
-            />
-          </p>
+          {loading && <div>Loading...</div>}
+          <VideoChannelDetails channelDetails={channelDetails} />
           <hr />
           <Comments
             commentCount={videos[0]?.statistics?.commentCount}

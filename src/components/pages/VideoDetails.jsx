@@ -10,12 +10,9 @@ const VideoDetails = () => {
     `videos?part=snippet,statistics&id=${videoId}`
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <section className="main-container grid grid-cols-3 gap-7">
+      {loading && <div>Loading...</div>}
       <div className="col-span-2">
         {videos.length > 0 && <PlayVideo videoId={videoId} videos={videos} />}
       </div>
