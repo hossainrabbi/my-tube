@@ -1,5 +1,6 @@
 import React from 'react';
 import useVideo from '../hooks/useVideo';
+import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
 import Comment from './Comment';
 
 const Comments = ({ commentCount, videoId }) => {
@@ -11,7 +12,7 @@ const Comments = ({ commentCount, videoId }) => {
     <div>
       <div className="mt-4">
         <h5 className="text-xl font-semibold text-gray-600">
-          {parseInt(commentCount).toLocaleString()} Comments
+          {convertToInternationalCurrencySystem(commentCount)} Comments
         </h5>
       </div>
       {/* Comments */}

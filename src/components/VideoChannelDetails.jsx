@@ -1,6 +1,7 @@
 import { Interweave } from 'interweave';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
 
 const VideoChannelDetails = ({ videoDescription, channelDetails }) => {
   return (
@@ -23,7 +24,10 @@ const VideoChannelDetails = ({ videoDescription, channelDetails }) => {
             </h3>
           </Link>
           <p className="text-gray-600 text-sm">
-            {channelDetails[0]?.statistics?.subscriberCount} subscriber
+            {convertToInternationalCurrencySystem(
+              channelDetails[0]?.statistics?.subscriberCount
+            )}{' '}
+            subscriber
           </p>
         </div>
       </div>

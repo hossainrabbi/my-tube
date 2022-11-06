@@ -5,6 +5,7 @@ import { AiFillLike } from 'react-icons/ai';
 import Comments from './Comments';
 import useVideo from '../hooks/useVideo';
 import VideoChannelDetails from './VideoChannelDetails';
+import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
 
 const PlayVideo = ({ videoId, videos }) => {
   const { loading, videos: channelDetails } = useVideo(
@@ -29,7 +30,9 @@ const PlayVideo = ({ videoId, videos }) => {
         <div className="flex items-center justify-between text-gray-600 mb-3">
           <p className="flex items-center gap-2">
             <span>
-              {parseInt(videos[0]?.statistics?.viewCount).toLocaleString() || 0}{' '}
+              {convertToInternationalCurrencySystem(
+                videos[0]?.statistics?.viewCount
+              ) || 0}{' '}
               views
             </span>
             <span>.</span>
@@ -40,7 +43,9 @@ const PlayVideo = ({ videoId, videos }) => {
           <p className="flex items-center gap-4">
             <span className="flex items-center">
               <AiFillLike className="mr-1" />
-              {parseInt(videos[0]?.statistics?.likeCount).toLocaleString() || 0}
+              {convertToInternationalCurrencySystem(
+                videos[0]?.statistics?.likeCount
+              ) || 0}
             </span>
           </p>
         </div>
