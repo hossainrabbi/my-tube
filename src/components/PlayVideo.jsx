@@ -10,7 +10,10 @@ const PlayVideo = ({ videoId, videos }) => {
   const { loading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${videos[0]?.snippet?.channelId}`
   );
-  console.log({ videos });
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -44,7 +47,6 @@ const PlayVideo = ({ videoId, videos }) => {
         <hr />
         {/* Channel Info */}
         <div>
-          {loading && <div>Loading...</div>}
           <VideoChannelDetails
             videoDescription={videos[0]?.snippet?.description}
             channelDetails={channelDetails}

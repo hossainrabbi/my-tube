@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 const useVideo = (url) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [videos, setVideos] = useState([]);
 
