@@ -7,7 +7,7 @@ const Navbar = () => {
     useSearchContext();
 
   return (
-    <header className="bg-slate-100 py-2 mb-6">
+    <header className="bg-slate-100 py-2">
       <nav className="main-container flex justify-between items-center">
         <Link to="/" onClick={handleHome}>
           <img
