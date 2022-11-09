@@ -24,7 +24,7 @@ const Video = ({ id, snippet }) => {
       <div className="px-4 py-3 flex gap-3">
         <div>
           <h3
-            className="text-lg font-medium text-gray-800 cursor-pointer"
+            className="text-lg font-medium text-gray-800 dark:text-white/90 cursor-pointer"
             onClick={handleVideoNavigate}
           >
             {snippet?.title?.length > 50
@@ -32,7 +32,7 @@ const Video = ({ id, snippet }) => {
               : snippet?.title}
           </h3>
           <h5
-            className="text-base inline-block font-semibold cursor-pointer text-gray-500 select-none my-1"
+            className="text-base inline-block font-semibold cursor-pointer text-gray-600 dark:text-white/70 select-none my-1"
             onClick={handleChannelNavigate}
           >
             {snippet?.channelTitle}

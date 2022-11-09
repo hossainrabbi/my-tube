@@ -29,8 +29,10 @@ const PlayVideo = ({ videoId, videos }) => {
         />
       </div>
       <div className="mt-3">
-        <h2 className="text-2xl font-semibold">{videos[0]?.snippet?.title}</h2>
-        <div className="flex items-center justify-between text-gray-600 mb-3">
+        <h2 className="text-2xl text-gray-900 dark:text-white/90 font-semibold">
+          {videos[0]?.snippet?.title}
+        </h2>
+        <div className="flex items-center justify-between text-gray-600 dark:text-white/50 mb-3">
           <p className="flex items-center gap-2">
             <span>
               {convertToInternationalCurrencySystem(

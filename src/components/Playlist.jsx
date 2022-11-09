@@ -25,14 +25,14 @@ const Playlist = ({ id, snippet }) => {
       <div className="px-4 py-3">
         <div>
           <h3
-            className="text-lg font-medium text-gray-800 mb-3 cursor-pointer"
+            className="text-lg font-medium dark:text-white/90 text-gray-800 mb-3 cursor-pointer"
             onClick={handlePlaylistNavigate}
           >
             {snippet?.title?.length > 50
               ? `${snippet?.title?.slice(0, 50)}...`
               : snippet?.title}
           </h3>
-          <p className="text-base font-semibold text-gray-600">
+          <p className="text-base font-semibold text-gray-600 dark:text-white/70">
             {snippet?.channelTitle}
           </p>
         </div>

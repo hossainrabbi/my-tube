@@ -57,10 +57,10 @@ const ChannelDetails = () => {
       </div>
       <div className="main-container ">
         <div className="text-center mt-24 mb-5">
-          <h3 className="text-2xl font-semibold text-gray-800">
+          <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">
             {channelDetails[0]?.snippet?.localized?.title}
           </h3>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-white/70">
             {convertToInternationalCurrencySystem(
               channelDetails[0]?.statistics?.subscriberCount
             )}{' '}

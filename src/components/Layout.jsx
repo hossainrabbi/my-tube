@@ -4,10 +4,10 @@ import Navbar from './Navbar';
 
 const Layout = () => {
   return (
-    <>
+    <div className="dark:bg-gray-900 min-h-screen">
       <Navbar />
       <Outlet />
-    </>
+    </div>
   );
 };
 

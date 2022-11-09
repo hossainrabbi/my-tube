@@ -23,13 +23,15 @@ const Comment = ({
       </div>
       <div className="w-full">
         <div className="flex items-center gap-3">
-          <h3 className="text-xl font-semibold">{authorDisplayName}</h3>
-          <span className="text-gray-600">-</span>
-          <span className="text-gray-600 text-base">
+          <h3 className="text-xl dark:text-white/70 font-semibold">
+            {authorDisplayName}
+          </h3>
+          <span className="text-gray-600 dark:text-white/60">-</span>
+          <span className="text-gray-600 dark:text-white/60 text-base">
             {moment(publishedAt).startOf('hour').fromNow()}
           </span>
         </div>
-        <p className="text-gray-600 text-base my-1">
+        <p className="text-gray-600 dark:text-white/60 text-base my-1">
           {textDisplay.length > 250 ? (
             <>
               {readMore ? (
@@ -49,7 +51,7 @@ const Comment = ({
             <Interweave content={textDisplay} />
           )}
         </p>
-        <span className="flex items-center text-gray-600">
+        <span className="flex items-center text-gray-600 dark:text-white/70">
           <AiFillLike className="mr-1 text-lg -mt-1" />
           {parseInt(likeCount).toLocaleString() || 0}
         </span>

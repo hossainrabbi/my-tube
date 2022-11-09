@@ -21,7 +21,7 @@ const Channel = ({ id, snippet }) => {
         />
       </div>
       <div className="px-4 pt-3 mt-5">
-        <h3 className="text-2xl font-medium text-center text-gray-800">
+        <h3 className="text-2xl font-medium text-center text-gray-800 dark:text-white/90">
           {snippet?.title?.length > 50
             ? `${snippet?.title?.slice(0, 50)}...`
             : snippet?.title}

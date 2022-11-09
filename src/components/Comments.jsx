@@ -12,13 +12,13 @@ const Comments = ({ commentCount, videoId }) => {
   return (
     <div>
       <div className="mt-4">
-        <h5 className="text-xl font-semibold text-gray-600">
+        <h5 className="text-xl font-semibold text-gray-600 dark:text-white/70">
           {convertToInternationalCurrencySystem(commentCount)} Comments
         </h5>
       </div>
       {/* Comments */}
       <div>
-        {loading && <Loading className="mt-5" />}
+        {loading && <Loading className="mt-5 dark:bg-gray-900" />}
         {commentDetails.length > 0 &&
           commentDetails.map((comment) => (
             <Comment

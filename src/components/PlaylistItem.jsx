@@ -26,7 +26,7 @@ const PlaylistItem = ({ videoId, videos, handleSetVideoId }) => {
           {videos.length > 0 &&
             videos.map((item, i) => (
               <div
-                className="flex items-center gap-5 mb-5 cursor-pointer"
+                className="flex items-center gap-5 mb-5 cursor-pointer dark:text-white/70"
                 key={item?.id}
                 onClick={() => handleSetVideoId(item)}
               >
