@@ -9,7 +9,9 @@ import Video from '../Video';
 const Home = () => {
   const { searchKeyword } = useSearchContext();
   const { loading, videos } = useVideo(
-    `search?part=snippet,id&q=${searchKeyword}&maxResults=${'50'}&regionCode=${'bd'}`
+    `search?part=snippet,id&q=${
+      searchKeyword || 'bangla'
+    }&maxResults=${'50'}&regionCode=${'bd'}`
   );
 
   if (loading) {
