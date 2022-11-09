@@ -6,6 +6,7 @@ import Comments from './Comments';
 import useVideo from '../hooks/useVideo';
 import VideoChannelDetails from './VideoChannelDetails';
 import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
+import Loading from './Loading';
 
 const PlayVideo = ({ videoId, videos }) => {
   const { loading, videos: channelDetails } = useVideo(
@@ -13,7 +14,7 @@ const PlayVideo = ({ videoId, videos }) => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading className="mt-5" />;
   }
 
   return (

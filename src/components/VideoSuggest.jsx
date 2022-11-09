@@ -1,5 +1,6 @@
 import React from 'react';
 import useVideo from '../hooks/useVideo';
+import Loading from './Loading';
 import Video from './Video';
 
 const VideoSuggest = ({ videoId }) => {
@@ -8,7 +9,7 @@ const VideoSuggest = ({ videoId }) => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading className="mt-5" />;
   }
 
   return (

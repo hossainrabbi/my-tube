@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom';
 import useVideo from '../../hooks/useVideo';
 import convertToInternationalCurrencySystem from '../../utils/convertToInternationalCurrencySystem';
 import ChannelVideo from '../ChannelVideo';
+import Loading from '../Loading';
 
 const ChannelDetails = () => {
   const { channelId } = useParams();
   const { loading, videos: channelDetails } = useVideo(
     `channels?part=snippet,statistics&id=${channelId}`
   );
-  console.log(channelDetails);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading className="mt-5" />;
   }
 
   return (
@@ -29,7 +29,7 @@ const ChannelDetails = () => {
       >
         <div className="absolute left-2/4 -translate-x-2/4 -bottom-20 z-10 text-center">
           <img
-            src={channelDetails[0]?.snippet?.thumbnails?.medium?.url}
+            src={channelDetails[0]?.snippet?.thumbnails?.default?.url}
             alt={channelDetails[0]?.snippet?.localized?.title}
             className="w-40 h-40 rounded-full"
           />

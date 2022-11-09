@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&family=Lato:wght@100;300;400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    font-family: 'Lato', sans-serif;
+  }
+}
 
 .main-container {
   @apply container mx-auto px-5;

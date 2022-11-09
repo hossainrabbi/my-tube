@@ -1,9 +1,12 @@
 import { Interweave } from 'interweave';
 import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
 
 const VideoChannelDetails = ({ videoDescription, channelDetails }) => {
+  const [showDescription, setShowDescription] = useState(false);
+
   return (
     <>
       <div className="flex items-center gap-4 mt-4">
@@ -32,7 +35,33 @@ const VideoChannelDetails = ({ videoDescription, channelDetails }) => {
         </div>
       </div>
       <p className="text-gray-600 my-4 ml-20">
-        <Interweave content={videoDescription} />
+        {showDescription ? (
+          <>
+            <Interweave content={videoDescription} />
+            <br />
+            <br />
+            <button
+              type="button"
+              className="font-semibold text-base hover:underline"
+              onClick={() => setShowDescription(!showDescription)}
+            >
+              Show less
+            </button>
+          </>
+        ) : videoDescription.length > 500 ? (
+          <>
+            <Interweave content={`${videoDescription.slice(0, 499)}...`} />
+            <button
+              type="button"
+              className="font-semibold text-base hover:underline"
+              onClick={() => setShowDescription(!showDescription)}
+            >
+              Show More
+            </button>
+          </>
+        ) : (
+          <Interweave content={videoDescription} />
+        )}
       </p>
     </>
   );

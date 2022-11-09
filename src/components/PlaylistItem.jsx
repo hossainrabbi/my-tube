@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiFillCaretRight } from 'react-icons/ai';
 import useVideo from '../hooks/useVideo';
+import Loading from './Loading';
 import PlayVideo from './PlayVideo';
 import VideoSuggest from './VideoSuggest';
 
@@ -10,7 +11,7 @@ const PlaylistItem = ({ videoId, videos, handleSetVideoId }) => {
   );
 
   if (SingleVideoLoading) {
-    return <div>Loading...</div>;
+    return <Loading className="mt-5" />;
   }
 
   return (

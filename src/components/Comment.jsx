@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { Interweave } from 'interweave';
+import moment from 'moment';
 
 const Comment = ({
   authorDisplayName,
@@ -21,7 +22,13 @@ const Comment = ({
         />
       </div>
       <div className="w-full">
-        <h3 className="text-xl font-semibold">{authorDisplayName}</h3>
+        <div className="flex items-center gap-3">
+          <h3 className="text-xl font-semibold">{authorDisplayName}</h3>
+          <span className="text-gray-600">-</span>
+          <span className="text-gray-600 text-base">
+            {moment(publishedAt).startOf('hour').fromNow()}
+          </span>
+        </div>
         <p className="text-gray-600 text-base my-1">
           {textDisplay.length > 250 ? (
             <>

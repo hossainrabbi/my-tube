@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useVideo from '../../hooks/useVideo';
 import { useEffect } from 'react';
 import PlaylistItem from '../PlaylistItem';
+import Loading from '../Loading';
 
 const PlayPlaylist = () => {
   const { playlistId } = useParams();
@@ -21,16 +22,12 @@ const PlayPlaylist = () => {
     setVideoId(item.snippet?.resourceId?.videoId);
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
-  console.log({
-    loading,
-    id: videoId || `---> ${videos[0]?.snippet?.resourceId?.videoId}`,
-  });
+  if (loading) {
+    return <Loading className="mt-5" />;
+  }
 
   return (
-    <section className="main-container grid grid-cols-3 gap-7">
+    <section className="main-container grid grid-cols-3 gap-7 mt-5">
       {videoId && videos.length > 0 && (
         <PlaylistItem
           videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}

@@ -1,5 +1,6 @@
 import React from 'react';
 import useVideo from '../hooks/useVideo';
+import Loading from './Loading';
 import Video from './Video';
 
 const ChannelVideo = ({ channelId }) => {
@@ -8,7 +9,7 @@ const ChannelVideo = ({ channelId }) => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading className="mt-5" />;
   }
 
   return (

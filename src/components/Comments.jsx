@@ -2,6 +2,7 @@ import React from 'react';
 import useVideo from '../hooks/useVideo';
 import convertToInternationalCurrencySystem from '../utils/convertToInternationalCurrencySystem';
 import Comment from './Comment';
+import Loading from './Loading';
 
 const Comments = ({ commentCount, videoId }) => {
   const { loading, videos: commentDetails } = useVideo(
@@ -17,7 +18,7 @@ const Comments = ({ commentCount, videoId }) => {
       </div>
       {/* Comments */}
       <div>
-        {loading && <div>Loading...</div>}
+        {loading && <Loading className="mt-5" />}
         {commentDetails.length > 0 &&
           commentDetails.map((comment) => (
             <Comment
