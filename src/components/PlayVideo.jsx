@@ -19,13 +19,15 @@ const PlayVideo = ({ videoId, videos }) => {
 
   return (
     <>
-      <ReactPlayer
-        url={`https://www.youtube.com/watch?v=${videoId}`}
-        controls
-        playing
-        width="100%"
-        height="555px"
-      />
+      <div className="w-full h-[25rem] xl:h-[555px]">
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${videoId}`}
+          controls
+          playing
+          width="100%"
+          height="100%"
+        />
+      </div>
       <div className="mt-3">
         <h2 className="text-2xl font-semibold">{videos[0]?.snippet?.title}</h2>
         <div className="flex items-center justify-between text-gray-600 mb-3">

@@ -9,7 +9,7 @@ const Video = ({ id, snippet }) => {
   };
 
   const handleChannelNavigate = () => {
-    navigate(`/channel/${id?.videoId}`);
+    navigate(`/channel/${snippet?.channelId}`);
   };
 
   return (

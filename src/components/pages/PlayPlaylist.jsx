@@ -27,7 +27,7 @@ const PlayPlaylist = () => {
   }
 
   return (
-    <section className="main-container grid grid-cols-3 gap-7 mt-5">
+    <section className="main-container grid grid-cols-1 xl:grid-cols-3 gap-7 mt-5">
       {videoId && videos.length > 0 && (
         <PlaylistItem
           videoId={videoId || videos[0]?.snippet?.resourceId?.videoId}

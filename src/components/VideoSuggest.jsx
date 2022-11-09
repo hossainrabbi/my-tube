@@ -14,7 +14,7 @@ const VideoSuggest = ({ videoId }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 gap-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-7">
         {videos.length > 0 &&
           videos.map((video) => <Video {...video} key={video?.id?.videoId} />)}
       </div>
