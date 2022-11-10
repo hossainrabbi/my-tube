@@ -17,16 +17,18 @@ const Comments = ({ commentCount, videoId }) => {
         </h5>
       </div>
       {/* Comments */}
-      <div>
-        {loading && <Loading className="mt-5 dark:bg-gray-900" />}
-        {commentDetails.length > 0 &&
-          commentDetails.map((comment) => (
-            <Comment
-              {...comment?.snippet?.topLevelComment?.snippet}
-              key={comment?.snippet?.topLevelComment?.id}
-            />
-          ))}
-      </div>
+      {commentCount > 0 && (
+        <div>
+          {loading && <Loading className="mt-5 dark:bg-gray-900" />}
+          {commentDetails.length > 0 &&
+            commentDetails.map((comment) => (
+              <Comment
+                {...comment?.snippet?.topLevelComment?.snippet}
+                key={comment?.snippet?.topLevelComment?.id}
+              />
+            ))}
+        </div>
+      )}
     </div>
   );
 };

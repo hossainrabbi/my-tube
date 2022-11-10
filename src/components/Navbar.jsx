@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsMoonFill, BsFillSunFill } from 'react-icons/bs';
+import { FaSearch } from 'react-icons/fa';
 import { useSearchContext } from '../contexts/SearchContext';
 import { useThemeContext } from '../contexts/ThemeContext';
 
@@ -18,23 +19,23 @@ const Navbar = () => {
             alt="My-Tube"
             className="h-10"
           />
-          <span className="text-lg font-josefin dark:text-white mt-1">
+          <span className="text-lg hidden sm:inline-block font-josefin dark:text-white mt-1">
             MyTube
           </span>
         </Link>
 
-        <form onSubmit={handleSearchSubmit}>
+        <form onSubmit={handleSearchSubmit} className="flex items-center">
           <input
             type="search"
             value={search}
-            className="border-2 focus:ring-2 dark:bg-gray-900 dark:text-white dark:border-white/50 dark:focus:ring-gray-900 focus:ring-gray-200 py-1 px-3 rounded-l outline-none rounded-r-none"
+            className="border-2 focus:ring-2 dark:bg-gray-900 dark:text-white dark:border-white/50 dark:focus:ring-gray-900 focus:ring-gray-200 w-20 sm:w-auto py-1 px-3 rounded-l outline-none rounded-r-none"
             onChange={handleChangeSearchKeyword}
           />{' '}
           <button
-            className="bg-gray-600 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:text-white text-white border-2 border-gray-600 focus:ring-2 focus:ring-gray-200 rounded-r px-3  py-1 -m-1"
+            className="bg-gray-600 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:text-white text-white border-2 border-gray-600 focus:ring-2 focus:ring-gray-200 rounded-r inline-block px-3 py-2 -m-1"
             type="submit"
           >
-            Search
+            <FaSearch />
           </button>
         </form>
 

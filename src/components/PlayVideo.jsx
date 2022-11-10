@@ -19,7 +19,7 @@ const PlayVideo = ({ videoId, videos }) => {
 
   return (
     <>
-      <div className="w-full h-[25rem] xl:h-[555px]">
+      <div className="w-full md:h-[25rem] xl:h-[555px]">
         <ReactPlayer
           url={`https://www.youtube.com/watch?v=${videoId}`}
           controls

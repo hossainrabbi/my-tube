@@ -10,7 +10,7 @@ const Home = () => {
   const { searchKeyword } = useSearchContext();
   const { loading, videos } = useVideo(
     `search?part=snippet,id&q=${
-      searchKeyword || 'bangla'
+      searchKeyword || 'bangladesh'
     }&maxResults=${'50'}&regionCode=${'bd'}`
   );
 
