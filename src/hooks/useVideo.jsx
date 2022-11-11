@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const useVideo = (url) => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const useVideo = (url) => {
         const data = await res.json();
 
         if (data.items && data.items.length > 0) {
-          setError(false);
+          setError(null);
           setLoading(false);
           setVideos([...data.items]);
         }
-      } catch {
+      } catch (err) {
         setLoading(false);
-        setError(true);
+        setError(err?.response?.data?.message || err.message);
       }
     }
 

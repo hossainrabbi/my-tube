@@ -8,12 +8,25 @@ import Loading from '../Loading';
 
 const ChannelDetails = () => {
   const { channelId } = useParams();
-  const { loading, videos: channelDetails } = useVideo(
-    `channels?part=snippet,statistics&id=${channelId}`
-  );
+  const {
+    loading,
+    error,
+    videos: channelDetails,
+  } = useVideo(`channels?part=snippet,statistics&id=${channelId}`);
 
   if (loading) {
     return <Loading className="mt-5" />;
+  }
+
+  if (error) {
+    return (
+      <div
+        className="main-container mt-5 p-4 mb-4 text-base text-red-700 bg-red-100 rounded-lg dark:bg-red-200 text-center dark:text-red-800"
+        role="alert"
+      >
+        {error}
+      </div>
+    );
   }
 
   return (

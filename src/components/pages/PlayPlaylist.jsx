@@ -10,7 +10,7 @@ const PlayPlaylist = () => {
   const { playlistId } = useParams();
   const [videoId, setVideoId] = useState('');
 
-  const { loading, videos } = useVideo(
+  const { loading, error, videos } = useVideo(
     `playlistItems?part=snippet&playlistId=${playlistId}&maxResults=1000`
   );
 
@@ -24,6 +24,17 @@ const PlayPlaylist = () => {
 
   if (loading) {
     return <Loading className="mt-5" />;
+  }
+
+  if (error) {
+    return (
+      <div
+        className="main-container mt-5 p-4 mb-4 text-base text-red-700 bg-red-100 rounded-lg dark:bg-red-200 text-center dark:text-red-800"
+        role="alert"
+      >
+        {error}
+      </div>
+    );
   }
 
   return (
